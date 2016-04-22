@@ -1,5 +1,11 @@
 {
+	"minimum-stability": "dev",
+	"prefer-stable": true,
     "require": {
-        "slim/slim": "~2.0"
+        "slim/slim": "~2.0",
+        "vrana/notorm": "@dev"
+    },
+    "autoload": {
+        "classmap": ["lib/","lib/Slim/Middleware.php", "lib/Slim/Middleware/JWTBasicAuth.php"]
     }
 }

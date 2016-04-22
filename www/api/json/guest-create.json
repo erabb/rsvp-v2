@@ -1,0 +1,28 @@
+{
+	"guests":[
+		{
+			"first_name" : "Sally",
+			"last_name" : "Smith",
+			"allowedGuest" : "0",
+			"email" : "guest1@event.com",
+			"note" : "The Smiths",
+			"code" : "12345"
+		},
+				{
+			"first_name" : "Sean",
+			"last_name" : "Smith",
+			"allowedGuest" : "0",
+			"email" : "guest2@event.com",
+			"note" : "The Smiths",
+			"code" : "12345"
+		},
+		{
+			"first_name" : "Candace",
+			"last_name" : "Smith",
+			"allowedGuest" : "1",
+			"email" : "guest3@event.com",
+			"note" : "The Smiths",
+			"code" : "12345"
+		}
+	]
+}

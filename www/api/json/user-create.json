@@ -1,0 +1,15 @@
+{
+	"first_name1" : "Jane",
+	"last_name1" : "Doe",
+	"first_name2" : "John",
+	"last_name2" : "Smith",
+	"email" : "jane@doe.com",
+	"email2" : "john@smith.com",
+	"address" : "1212 Sunny  Lane",
+	"address2" : "Suite 200",
+	"city" : "Atlanta",
+	"state" : "GA",
+	"zip" : "30303",
+	"phone" : "4045551212",
+	"password" : "12345"
+}

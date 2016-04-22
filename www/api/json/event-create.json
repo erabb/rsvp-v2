@@ -1,0 +1,12 @@
+{
+	"user_id" : "1",
+	"url" : "jane",
+	"venue" : "Madison Gardens",
+	"address" : "121 Sleepy Brook Ln",
+	"city" : "Madison",
+	"state" : "GA",
+	"zip" : "30110",
+	"event_date" : "2017-12-04 17:00:00",
+	"notes" : "Please wear nice shoes",
+	"event_type" : "findName"
+}
