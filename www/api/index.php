@@ -123,7 +123,19 @@ $app->get('/guest/:eventid', function($eventid) use ($guest, $app){
 
 });
 
+$app->get('/guest-party/:eventid/:partyid', function($eventid,$partyid) use ($guest){
 
+	echo $guest->getGuestByParty($eventid, $partyid);
+
+});
+
+$app->get('/guest-code/:eventid/:code', function($eventid, $code) use ($guest){
+
+	echo $guest->guestCodeLogin($eventid, $code);
+
+});
+
+	
 /********************************** EVENT **********************************/
 
 //create event
