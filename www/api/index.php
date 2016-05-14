@@ -109,6 +109,21 @@ $app->put('/guest-edit/:id', function($id) use( $guest, $app ){
 
 });
 
+$app->put('/guest-rsvp', function() use ($guest, $app){
+
+	$data = $app->request()->getBody();
+
+	echo $guest->rsvp($data);
+
+});
+
+$app->get('/guest/:eventid', function($eventid) use ($guest, $app){
+
+	echo $guest->getGuests($eventid);
+
+});
+
+
 /********************************** EVENT **********************************/
 
 //create event

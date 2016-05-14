@@ -6,22 +6,22 @@
 				{
 					"first_name" : "Stephen",
 					"last_name" : "Smith",
-					"allowedGuest" : "0",
 					"email" : "stephen@event.com",
-					"note" : "The Smiths"
+					"note" : "The Smiths",
+					"isComing" : "1"
 				},
 			"question":
 				[
 					{
-						"question_id":"",
-						"answer":""
+						"question_id":"1",
+						"answer":"Chicken"
 					},
 					{
-						"question_id":"",
-						"answer":""
+						"question_id":"2",
+						"answer":"Yes"
 					}
 				],
-			"plus-one":{
+			"plus_one":{
 					"info":{
 							"first_name" : "Plussy",
 							"last_name" : "Juan",
@@ -30,17 +30,18 @@
 							"code" : "12345",
 							"event_id":"1",
 							"guest_id":"3",
-							"party_id":"1"
+							"party_id":"1",
+							"allowedGuest":"0"
 					},
 					"question":
 					[
 						{
-							"question_id":"",
-							"answer":""
+							"question_id":"1",
+							"answer":"Beef"
 						},
 						{
-							"question_id":"",
-							"answer":""
+							"question_id":"2",
+							"answer":"No"
 						}
 					]
 
@@ -52,9 +53,9 @@
 				{
 					"first_name" : "Stephen",
 					"last_name" : "Smith",
-					"allowedGuest" : "0",
 					"email" : "stephen@event.com",
-					"note" : "The Smiths"
+					"note" : "The Smiths",
+					"isComing" : "0"
 				},
 			"question":
 				[
@@ -67,7 +68,7 @@
 						"answer":""
 					}
 				],
-			"plus-one" : {}
+			"plus_one" : {}
 			
 		}
 	]

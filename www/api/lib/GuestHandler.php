@@ -57,9 +57,9 @@
 		}
 
 		//guest adds plus one guest
-		public function createPlusOne($data){
+		public function createPlusOne($data, $questions){
 			
-			$data = json_decode($data, true);
+			//$data = json_decode($data, true);
 			
 			//create guest
 			$guest = array(
@@ -90,7 +90,20 @@
 				//enter id into guest_plus record
 				$this->db->guest_to_guestplus()->insert($plus);
 
-				$response = array("response"=>"true");
+				//then update question answers
+				foreach ($questions as $q) {
+					
+					$a = array(
+						'question_id'=>$q['question_id'],
+						'guest_id' => $guest_result['id'],
+						'answer'=>$q['answer']
+					);
+
+					$this->db->answer()->insert($a);
+
+				}
+
+				$response = array("response"=>"true","guestplus_is"=>$guest_result['id']);
 
 			} else{
 
@@ -125,13 +138,49 @@
 
 		}
 
+
 		//guests rsvps or edits own status
 		public function rsvp($data){
 
-			//group of guests data
-			//loop through guests ids and update
-			//loop through
+			$data = json_decode($data, true);
 
+			//loop through party guests
+			foreach ($data['guest'] as $guest) {
+				$guest['info']['modified'] = date('Y-m-d H:i:s');
+
+				//for each guests update info
+				$this->db->guest[$guest['id']]->update($guest['info']);
+
+				//then update question answers
+				foreach ($guest['question'] as $q) {
+
+					$a = array(
+						'question_id'=>$q['question_id'],
+						'guest_id' => $guest['id'],
+						'answer'=>$q['answer']
+					);
+
+					$this->db->answer()->insert($a);
+
+				}
+
+				//if plus one send guestinfo
+				if($guest['plus_one']){
+
+					// enter plusone guest info
+					$this->createPlusOne($guest['plus_one']['info'], $guest['plus_one']['question']);
+
+				}
+
+				$response = array("response"=>"true");
+				return json_encode($response);
+			}
+
+
+		}
+
+		//if guests edits their own info
+		public function editGuestsSelf($id, $data){
 
 		}
 
@@ -155,11 +204,80 @@
 		}
 
 		//get all of the guests lists for admin / guest lookup
-		public function getGuests($partyid){
+		public function getGuests($eventid){
+			$guestHolder = [];
+
+			$guests = $this->db->guest('isPlusGuest = ?', 0)->where('event_id = ?', $eventid);
+
+			foreach ($guests as $g) {
+				$guest = [];
+				$guest['id'] = $g['id'];
+				$guest['info'] = $g;
+
+				//pull questions
+				$questions = $this->db->answer('guest_id = ?', $g['id']);
+				$question = [];
+				
+				foreach ($questions as $q) {
+
+
+					$qArray = array(
+						
+						'question_id'=>$q['question_id'],
+						'answer'=>$q['answer']
+
+					);
+
+					array_push($question, $qArray);
+
+				}
+
+				$guest['question'] = $question;
+
+				//check to see if plus guest exists
+				$plus = $this->db->guest_to_guestplus('guest_id = ?', $g['id'])->fetch();
+
+				//get plus one info
+				if($plus){
+					$plus_one = [];
+
+					$guestPlus = $this->db->guest('id = ?', $plus['id']);
+
+					$plus_one['info'] = $guestPlus;
+
+					//pull questions
+					$questionsPlus = $this->db->answer('guest_id = ?', $plus['id']);
+					$questionPlus = [];
+					
+					foreach ($questionsPlus as $qPlus) {
+
+
+						$qArrayPlus = array(
+							
+							'question_id'=>$qPlus['question_id'],
+							'answer'=>$qPlus['answer']
+
+						);
+
+						array_push($questionPlus, $qArrayPlus);
+
+					}
+
+					$plus_one['question'] = $questionPlus;
+
+					$guest['plus_one'] = $plus_one;
+
+					
+
+				}
+
+				array_push($guestHolder, $guest);
+			}
+
+			return json_encode($guestHolder);	
 
 		}
 
-		//
 
 
 	}
